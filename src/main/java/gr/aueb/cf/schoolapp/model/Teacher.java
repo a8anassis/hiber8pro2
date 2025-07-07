@@ -24,7 +24,7 @@ public class Teacher {
     private String lastname;
     private Boolean active;
 
-    // private Region region;
+    private Region region;
 
     @Getter(AccessLevel.PROTECTED)
     @ManyToMany(mappedBy = "teachers")
