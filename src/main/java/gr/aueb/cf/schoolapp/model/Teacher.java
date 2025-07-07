@@ -24,6 +24,8 @@ public class Teacher {
     private String lastname;
     private Boolean active;
 
+    @ManyToOne()
+    @JoinColumn(name = "region_id")
     private Region region;
 
     @Getter(AccessLevel.PROTECTED)
