@@ -41,6 +41,7 @@ public class Teacher {
     }
 
     public void removeCourse(Course course) {
+        if (courses == null) return;
         courses.remove(course);
         course.getTeachers().remove(this);
     }
