@@ -32,6 +32,10 @@ public class Teacher {
     @ManyToMany(mappedBy = "teachers")
     private Set<Course> courses = new HashSet<>();
 
+    @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
+    @JoinColumn(name = "teacher_more_info_id")
+    private TeacherMoreInfo teacherMoreInfo;
+
     public Set<Course> getAllCourses() {
         return Collections.unmodifiableSet(courses);
     }
