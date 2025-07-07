@@ -1,6 +1,5 @@
 package gr.aueb.cf.schoolapp.model;
 
-import com.mysql.cj.x.protobuf.MysqlxCrud;
 import jakarta.persistence.*;
 import lombok.*;
 
