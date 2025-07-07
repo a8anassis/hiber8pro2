@@ -39,4 +39,12 @@ public class Region {
         teachers.remove(teacher);
         teacher.setRegion(null);
     }
+
+    @Override
+    public String toString() {
+        return "Region{" +
+                "id=" + id +
+                ", title='" + title + '\'' +
+                '}';
+    }
 }
