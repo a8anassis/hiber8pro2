@@ -29,4 +29,13 @@ public class TeacherMoreInfo {
 
     @OneToOne(mappedBy = "teacherMoreInfo")
     private Teacher teacher;
+
+    @Override
+    public String toString() {
+        return "TeacherMoreInfo{" +
+                "id=" + id +
+                ", dateOfBirth=" + dateOfBirth +
+                ", gender=" + gender +
+                '}';
+    }
 }
