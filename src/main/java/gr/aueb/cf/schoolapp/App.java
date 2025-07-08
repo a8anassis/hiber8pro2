@@ -14,6 +14,7 @@ import jakarta.persistence.criteria.*;
 
 import javax.xml.transform.stream.StreamResult;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
@@ -124,7 +125,7 @@ public class App {
 //        teachers.forEach(System.out::println);
 
 
-        // Select for every region =>  region.title and count for  inactive teachers per region
+        // Select for every region =>  region.title and count for  inactive teachers per region - JPQL
 //        String sql = "SELECT r.title, count(t) FROM Region r LEFT JOIN r.teachers t " +
 //                "WHERE t.active = false OR t.active IS NULL GROUP BY r.title";
 //        TypedQuery<Object[]> query = em.createQuery(sql, Object[].class);
@@ -136,6 +137,57 @@ public class App {
 //            System.out.println();
 //        }
 
+        // Select for every region =>  region.title and count for  inactive teachers per region - Criteria API
+//        CriteriaBuilder cb = em.getCriteriaBuilder();
+//        CriteriaQuery<Object[]> query = cb.createQuery(Object[].class);
+//        Root<Region> region = query.from(Region.class);
+//        Join<Region, Teacher> teacher = region.join("teachers", JoinType.LEFT);
+//
+//        query.multiselect(
+//                region.get("title"),
+//                cb.count(teacher)
+//        ).where(
+//                cb.or(
+//                        cb.isFalse(teacher.get("active")),
+//                        cb.isNull(teacher.get("active"))
+//                )
+//
+//        ).groupBy(region.get("title"));
+//
+//        List<Object[]> inactiveTeachersCountPerRegion = em.createQuery(query).getResultList();
+//        for (Object[] row : inactiveTeachersCountPerRegion) {
+//            for (Object item : row) {
+//                System.out.print(item + " ");
+//            }
+//            System.out.println();
+//        }
 
+        List<Teacher> teachers = findByCriteria(null, null, true);
+        teachers.forEach(System.out::println);
+    }
+
+
+    // filtering teachers με Multiple Criteria
+    public static List<Teacher> findByCriteria(String firstname, String lastname, Boolean active) {
+        CriteriaBuilder cb = em.getCriteriaBuilder();
+        CriteriaQuery<Teacher> query = cb.createQuery(Teacher.class);
+        Root<Teacher> teacher = query.from(Teacher.class);
+
+        List<Predicate> predicates = new ArrayList<>();
+
+        if (firstname != null) {
+            predicates.add(cb.like(teacher.get("firstname"), firstname + "%"));
+        }
+
+        if (lastname != null) {
+            predicates.add(cb.like(teacher.get("lastname"), lastname + "%"));
+        }
+
+        if (active != null) {
+            predicates.add(cb.equal(teacher.get("active"), active));
+        }
+
+        query.where(predicates.toArray(new Predicate[0]));
+        return em.createQuery(query).getResultList();
     }
 }
