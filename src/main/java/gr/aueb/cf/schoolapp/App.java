@@ -187,7 +187,7 @@ public class App {
             predicates.add(cb.equal(teacher.get("active"), active));
         }
 
-        query.where(predicates.toArray(new Predicate[0]));
+        query.where(predicates.toArray(new Predicate[0])); // preserve type safetυ
         return em.createQuery(query).getResultList();
     }
 }
