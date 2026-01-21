@@ -27,8 +27,8 @@ public class TeacherMoreInfo {
     @Enumerated(EnumType.STRING)
     private GenderType gender;
 
-    @OneToOne(mappedBy = "teacherMoreInfo")
-    private Teacher teacher;
+//    @OneToOne(mappedBy = "teacherMoreInfo")
+//    private Teacher teacher;
 
     @Override
     public String toString() {
