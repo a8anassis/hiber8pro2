@@ -162,7 +162,7 @@ public class App {
 //            System.out.println();
 //        }
 
-        List<Teacher> teachers = findByCriteria(null, null, true);
+        List<Teacher> teachers = findByCriteria("Αθανάσιος", null, true);
         teachers.forEach(System.out::println);
     }
 

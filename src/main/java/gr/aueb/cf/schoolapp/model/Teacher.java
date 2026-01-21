@@ -23,7 +23,7 @@ public class Teacher {
     private String lastname;
     private Boolean active;
 
-    @ManyToOne()
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "region_id")
     private Region region;
 
